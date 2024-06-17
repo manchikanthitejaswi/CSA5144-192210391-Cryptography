@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+// Function to calculate power
+long long int power(long long int a, long long int b, long long int P) {
+    if (b == 1)
+        return a;
+    else
+        return (((long long int)pow(a, b)) % P);
+}
+
+int main() {
+    // Publicly known prime number
+    long long int P;
+    printf("Enter the value of prime number P: ");
+    scanf("%lld", &P);
+
+    // Publicly known base
+    long long int G;
+    printf("Enter the value of base G: ");
+    scanf("%lld", &G);
+
+    // Alice's private key
+    long long int a;
+    printf("Enter the private key of Alice (a): ");
+    scanf("%lld", &a);
+
+    // Bob's private key
+    long long int b;
+    printf("Enter the private key of Bob (b): ");
+    scanf("%lld", &b);
+
+    // Calculation of A and B
+    long long int A = power(G, a, P);
+    long long int B = power(G, b, P);
+
+    // Calculation of secret key
+    long long int keyA = power(B, a, P);
+    long long int keyB = power(A, b, P);
+
+    printf("Key calculated by Alice: %lld\n", keyA);
+    printf("Key calculated by Bob: %lld\n", keyB);
+
+    return 0;
+}
